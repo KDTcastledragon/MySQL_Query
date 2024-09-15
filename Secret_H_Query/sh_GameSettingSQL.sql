@@ -1,5 +1,5 @@
 
-CREATE TABLE game_setting (
+CREATE TABLE games (
     game_code VARCHAR(200) PRIMARY KEY,
     game_mode_key varchar(10),
     
@@ -12,6 +12,7 @@ CREATE TABLE game_setting (
     
     winner ENUM('facist', 'liberal') default null
     
+    
     -- foreign key (game_mode_key) references gamemode (game_mode_key),
 --     foreign key (total_player) references gamemode (total_player),
 --     foreign key (facist) references gamemode (facist),
@@ -20,7 +21,13 @@ CREATE TABLE game_setting (
 --     foreign key (turncyclelength) references gamemode (turncyclelength)
 );
 
+create table game_history (
+	game_code VARCHAR(200) PRIMARY KEY
+);
 
+
+
+drop table games;
 -- ======================================================================================================================================================
 -- DELIMITER $$
 

@@ -1,12 +1,11 @@
 
-select m.tileorder as '뽑을순서', m.tilekey as '메인타일' , d.tileorder as '버려진순서' , d.tilekey as '버려진타일' from maindeck m
-left join discardeddeck as d on m.tileorder = d.tileorder
-where gamecode = '0'
-order by m.tileorder;
+select m.tile_order as '뽑을순서', m.tile_key as '메인타일' , d.tile_order as '버려진순서' , d.tile_key as '버려진타일' from main_deck m
+left join discarded_deck as d on m.tile_order = d.tile_order
+where game_code = ''
+order by m.tile_order;
 
-truncate maindeck;
-truncate discardeddeck;
-call create_deckBox();
+delete from main_deck where game_code='';
+delete from discarded_deck where game_code='';
 
 select * from discarded_deck order by tile_order;
 
@@ -15,13 +14,15 @@ select * from discarded_deck order by tile_order;
 CREATE TABLE main_deck (
     game_code VARCHAR(50),
     tile_order INT,
-    tile_key VARCHAR(10) DEFAULT NULL
+    tile_key VARCHAR(10) DEFAULT NULL,
+    tile_type ENUM('facist', 'liberal') NOT NULL
 );
 
 CREATE TABLE discarded_deck (
     game_code VARCHAR(50),
     tile_order INT,
-    tile_key VARCHAR(10) DEFAULT NULL
+    tile_key VARCHAR(10) DEFAULT NULL,
+    tile_type ENUM('facist', 'liberal') NOT NULL
 );
 
 -- DELIMITER //

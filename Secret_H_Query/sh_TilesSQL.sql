@@ -1,33 +1,37 @@
-CREATE TABLE policytiles (
-    tilekey VARCHAR(10) PRIMARY KEY,
-    tiletype ENUM('facist', 'liberal') NOT NULL
+CREATE TABLE policy_tiles (
+    tile_key VARCHAR(10) PRIMARY KEY,
+    tile_type ENUM('facist', 'liberal') NOT NULL
 );
 
-select * from policytiles
-order by substring(tilekey,1,1), cast(substring(tilekey,2,2) as unsigned); -- (cardkey,2,1)로 하면, f10의 0이 인식이 안된서 안된다.
+select * from policy_tiles
+order by substring(tile_key,1,1), cast(substring(tile_key,2,2) as unsigned); -- (tile_key,2,1)로 하면, f10의 0이 인식이 안된서 안된다.
 
 -- ==========================================================================================================================================================
 delimiter //
-create procedure create_policyTiles()
+create procedure create_policy_tiles()
 begin
 	declare i int default 1;
     declare j int default 1;
-    declare inserted_tilekey varchar(10); -- 반드시 선언을 먼저 해줘야한다.
+    declare inserted_tile_key varchar(10); -- 반드시 선언을 먼저 해줘야한다.
     
     while i<=11 do
-		set inserted_tilekey = concat('f',i);
-		insert into policytiles(tilekey,tiletype)
-		values(inserted_tilekey , 'facist');
+		set inserted_tile_key = concat('f',i);
+        
+		insert into policy_tiles(tile_key,tile_type)
+		values(inserted_tile_key , 'facist');
+        
 		set i = i+1;
 	end while;
     
     while j<=6 do
-		set inserted_tilekey= concat('l',j);
-		insert into policytiles(tilekey,tiletype)
-		values(inserted_tilekey , 'liberal');
+		set inserted_tile_key= concat('l',j);
+        
+		insert into policy_tiles(tile_key,tile_type)
+		values(inserted_tile_key , 'liberal');
+        
 		set j = j+1;
 	end while;
 end //
 delimiter ;
 
-call create_policyTiles();
+call create_policy_tiles();

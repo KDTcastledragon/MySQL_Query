@@ -1,18 +1,28 @@
 create table user(
 	id varchar(100) primary key,
-    user_name varchar(30) default '김성민',
-    birth TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    phone_number varchar(11) default '01015771577',
+    password varchar(1000) not null default 'tjdfyd123!',
+    
+    user_name varchar(30) default '김경식',
+    birth TIMESTAMP DEFAULT '1996-08-17',
+    phone_number varchar(11) default '01038193018',
+    
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deactivation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_benned boolean default false,
+    deactivation_date TIMESTAMP,
+    
+    benned boolean default false,
     ben_cause varchar(3000) default null,
-    ben_count int
+    unben_cause varchar(3000) default null,
+    ben_count int default 0
+);
+
+create table permanent_benned_user(
+	user_name varchar(30) default '김경식',
+    birth TIMESTAMP DEFAULT '1996-08-17',
+    phone_number varchar(11) default '01038193018'
 );
 
 alter table user modify ben_cause varchar(3000);
 describe user;
-
 
 select * from user;
 drop table user;
