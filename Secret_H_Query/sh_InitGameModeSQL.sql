@@ -1,25 +1,25 @@
-create table gamemode(
-	gamemodekey varchar(10) primary key,
-	totalplayer INT DEFAULT 5,
+create table game_mode(
+	game_mode_key varchar(10) primary key,
+	total_player INT DEFAULT 5,
     facist INT DEFAULT 1,
     liberal INT DEFAULT 3,
     h INT DEFAULT 1,
     
-    turncyclelength int default 5,
+    turn_cycle_length int default 5,
     
-    CONSTRAINT check_totalplayer CHECK (totalplayer BETWEEN 5 AND 10),
+    CONSTRAINT check_total_player CHECK (totalplayer BETWEEN 5 AND 10),
     CONSTRAINT check_h CHECK (h = 1),
-    CONSTRAINT check_liberal CHECK (liberal = totalplayer - facist),
-    CONSTRAINT check_turncyclelength CHECK (turncyclelength = totalplayer)
+    CONSTRAINT check_liberal CHECK (liberal = total_player - facist),
+    CONSTRAINT check_turn_cycle_length CHECK (turn_cycle_length = total_player)
 );
 
-select * from gamemode 
-order by  cast(substring_index(gamemodekey, 'p', 1) AS UNSIGNED); -- ,cast(substring_index(substring_index(gamemodekey, 'p', -1), 'f', 1) AS UNSIGNED);
+select * from game_mode 
+order by  cast(substring_index(game_mode_key, 'p', 1) AS UNSIGNED); -- ,cast(substring_index(substring_index(gamemodekey, 'p', -1), 'f', 1) AS UNSIGNED);
 
-call insert_gamemode();
+call insert_game_mode();
 
 delimiter //
-create procedure insert_gamemode()
+create procedure insert_game_mode()
 begin
 	declare tot int default 5;
     declare fac int default 1;
@@ -31,7 +31,7 @@ begin
         
 		while i<=2 do
 			set inserted_key = concat(tot,'p',fac,'f');
-			insert into gamemode(gamemodekey , totalplayer,facist,liberal,h,turncyclelength)
+			insert into game_mode(gamemodekey , totalplayer,facist,liberal,h,turncyclelength)
 			values(inserted_key, tot , fac , tot-fac , 1 , tot);
             set tot = tot + 1;
             set i = i+1;
