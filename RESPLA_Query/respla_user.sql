@@ -26,11 +26,12 @@ describe user;
 
 select * from user;
 drop table user;
+truncate user;
 
 insert into user(id)
-values('weaecwebrc'),('krbepg'),('losrebtArk'),('130beben'),('ben1139'),('imben0013'),('abcdefghabcdefgh')
-,('magic34'),('warcraft3'),('lostromm'),('666beben'),('ben77777'),('imben001311'),('abcdefghabcdefgh2')
-,('chase777'),('wow'),('isaman'),('999beben'),('bwef39'),('imbbbbbb3'),('565654dfsgh'),('admin');
+values('weaecwebrc'),('krbepg'),('losrebtArk'),('130beben'),('ben1139'),('imben0013'),('abcdefgh1234')
+,('magic34'),('warcraft3'),('lostromm'),('666beben'),('ben77777'),('imben001311'),('abcdefgh9876')
+,('chase777'),('wow'),('isaman'),('999beben'),('bwef39'),('imbbbbbb3'),('abcdefgh3387'),('admin');
 
 update user set is_benned = true  where id like '%ben%'; -- 그냥 임시리
 
