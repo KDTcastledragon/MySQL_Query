@@ -41,11 +41,13 @@ create table administrator(
 	id varchar(100) primary key,
     password varchar(1000) not null default 'tjdfyd123!',
     
-    user_name varchar(30) default '김경식',
+    admin_name varchar(30) default '관명식',
     birth TIMESTAMP DEFAULT '1996-08-17',
     phone_number varchar(11) default '01038193018',
     
     authentication varchar(30) default 'admin',
     
-    join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    latest_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+drop table administrator;
