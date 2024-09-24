@@ -22,6 +22,10 @@ create table permanent_benned_user(
 );
 
 alter table user modify ben_cause varchar(3000);
+alter table user modify birth date not null;
+alter table user modify user_name varchar(30) not null;
+alter table user modify phone_number varchar(11) not null;
+
 describe user;
 
 select * from user;
