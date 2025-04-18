@@ -21,22 +21,22 @@ select * from seats where id='tjdfyd0817';
 select id,count(*) as count from usage_history
 group by id
 order by count desc;
-
+-- ===
 -- =========================================================================================================
 update seats set occupied = false , id=null , upp_code = null where id='tjdfyd0817';
 delete from user_purchased_product where id='tjdfyd0817';
 delete from usage_history where id='tjdfyd0817';
-
-update seats set occupied = false , id=null , upp_code = null where id='assemble08';
-delete from user_purchased_product where id='assemble08';
-delete from usage_history where id='assemble08';
 -- =========================================================================================================
 
 describe product;
 select * from product;
 
-update product set day_value = 180 where p_type = 'f';
-delete from product where price = 40000;
+ALTER TABLE seats 
+ADD CONSTRAINT fk_user_id  -- 외래 키 이름 설정 (원하는 대로 변경 가능)
+FOREIGN KEY (id) 
+REFERENCES user(id);
+
+
 
 
 -- 1. 테이블 생성

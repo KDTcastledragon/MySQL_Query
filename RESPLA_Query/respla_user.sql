@@ -1,10 +1,10 @@
 create table user(
 	id varchar(100) primary key,
-    password varchar(1000) not null default 'tjdfyd123!',
+    password varchar(1000) not null,
     
-    user_name varchar(30) default '김경식',
-    birth TIMESTAMP DEFAULT '1996-08-17',
-    phone_number varchar(11) default '01038193018',
+    user_name varchar(30),
+    birth date,
+    phone_number varchar(11),
     
     join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deactivation_date TIMESTAMP,
@@ -24,34 +24,44 @@ create table permanent_benned_user(
 alter table user modify ben_cause varchar(3000);
 alter table user modify birth date not null;
 alter table user modify user_name varchar(30) not null;
-alter table user modify phone_number varchar(11) not null;
+alter table user modify phone_number varchar(11) unique not null;
 
 describe user;
 
 select * from user;
-drop table user;
+-- drop table user;
 truncate user;
-
-insert into user(id)
-values('weaecwebrc'),('krbepg'),('losrebtArk'),('130beben'),('ben1139'),('imben0013'),('abcdefgh1234')
-,('magic34'),('warcraft3'),('lostromm'),('666beben'),('ben77777'),('imben001311'),('abcdefgh9876')
-,('chase777'),('wow'),('isaman'),('999beben'),('bwef39'),('imbbbbbb3'),('abcdefgh3387'),('admin');
 
 update user set is_benned = true  where id like '%ben%'; -- 그냥 임시리
 
 describe user;
 
+delete from user where id = 'tjdfyd0817';
+delete from user where id = 'whatthe11';
+
+-- ==================================================================================================================================================
 create table administrator(
 	id varchar(100) primary key,
-    password varchar(1000) not null default 'tjdfyd123!',
+    password varchar(1000) not null,
     
-    admin_name varchar(30) default '관명식',
-    birth TIMESTAMP DEFAULT '1996-08-17',
-    phone_number varchar(11) default '01038193018',
+    admin_name varchar(30),
+    admin_phone_number varchar(11),
     
-    authentication varchar(30) default 'admin',
+    authority enum('admin','superAdmin','initAdmin') not null,
     
     latest_update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-drop table administrator;
+insert into administrator(id,password,admin_name,admin_phone_number,authority)
+values('abcdefg11234567','uiernkv0898##!','김사무엘루','01014595148','admin'); -- uiernkv0898##!
+
+select * from administrator;
+
+-- truncate administrator;
+-- drop table administrator;
+
+create table admin_history(
+	id varchar(100) primary key,
+	action_type varchar(100),
+    action_time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
